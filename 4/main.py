@@ -1,7 +1,22 @@
 def check_if_valid_password(password: int, additional=False) -> bool:
-    if len(str(password)) != 6:
-        return False
+    return len(str(password)) == 6 and \
+        digit_adjacency(password, additional) and \
+        non_decreasing(password)
 
+
+def non_decreasing(password):
+    str_password = str(password)
+    non_decreasing_req = True
+    for i, letter in enumerate(str_password):
+        # are digits non-decreasing
+        if i > 0:
+            previous_letter = str_password[i - 1]
+            if int(letter) < int(previous_letter):
+                non_decreasing_req = False
+    return non_decreasing_req
+
+
+def digit_adjacency(password, additional):
     any_digit_adjacency = False
     str_password = str(password)
     for i, letter in enumerate(str_password):
@@ -17,17 +32,7 @@ def check_if_valid_password(password: int, additional=False) -> bool:
                         if letter == str_password[i + 1]:
                             continue
                 any_digit_adjacency = True
-    if not any_digit_adjacency:
-        return False
-
-    for i, letter in enumerate(str_password):
-        # are digits non-decreasing
-        if i > 0:
-            previous_letter = str_password[i - 1]
-            if int(letter) < int(previous_letter):
-                return False
-
-    return True
+    return any_digit_adjacency
 
 
 def count_valid_passwords(start: int, end: int, additional=False) -> int:
