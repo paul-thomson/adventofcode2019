@@ -53,3 +53,37 @@ def test_count_valid_passwords_3():
     actual_output = count_valid_passwords(start, end)
 
     assert actual_output == expected_output
+
+
+def test_check_if_valid_password_additional_1():
+    expected_output = True
+
+    actual_output = check_if_valid_password(112233, additional=True)
+
+    assert expected_output == actual_output
+
+
+def test_check_if_valid_password_additional_2():
+    expected_output = False
+
+    actual_output = check_if_valid_password(123444, additional=True)
+
+    assert expected_output == actual_output
+
+
+def test_check_if_valid_password_additional_3():
+    expected_output = True
+
+    actual_output = check_if_valid_password(111122, additional=True)
+
+    assert expected_output == actual_output
+
+
+def test_count_valid_passwords_additional_1():
+    start = 123555
+    end = 123567
+    expected_output = 5
+
+    actual_output = count_valid_passwords(start, end, additional=True)
+
+    assert actual_output == expected_output
